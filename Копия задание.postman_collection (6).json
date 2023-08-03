@@ -1,0 +1,367 @@
+{
+	"info": {
+		"_postman_id": "762b2078-6524-44dc-80bb-dce8f2439892",
+		"name": "задание",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26953393"
+	},
+	"item": [
+		{
+			"name": "тесты",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"login\": \"{{test_login}}\",\r\n  \"password\": \"{{test_password}}\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/api/v1/account/login",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"account",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "токен",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let jsonData = JSON.parse(responseBody);\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"    pm.collectionVariables.set(\"test_auth\", jsonData.accessToken)"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"login\": \"{{test_login}}\",\r\n  \"password\": \"{{test_password}}\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/api/v1/account/login",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"account",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "баланс",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/api/v1/account/balance",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"account",
+						"balance"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "темы публикаций",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "index",
+							"value": "0",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "pageSize",
+							"value": "3",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/api/v1/entities/subjects?index=0&pageSize=3",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"entities",
+						"subjects"
+					],
+					"query": [
+						{
+							"key": "index",
+							"value": "0"
+						},
+						{
+							"key": "pageSize",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "документы",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Название новостных агенств\", function () {\r",
+							"        var jsonData = JSON.parse(responseBody);\r",
+							"pm.collectionVariables.set('news_agent_1' , jsonData[0]['ok']['source'][\"name\"]);\r",
+							" pm.collectionVariables.set('news_agent_2' , jsonData[1]['ok']['source']['name'])     \r",
+							" });\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"ids\": [\r\n{{string_1}},\r\n{{string_2}}\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/api/v1/documents",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"documents"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{test_auth}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "test_login",
+			"value": "sf_student8",
+			"type": "string"
+		},
+		{
+			"key": "test_password",
+			"value": "5QB0KM/",
+			"type": "string"
+		},
+		{
+			"key": "current_balance",
+			"value": "774193",
+			"type": "string"
+		},
+		{
+			"key": "base_url",
+			"value": "https://gateway.scan-interfax.ru",
+			"type": "string"
+		},
+		{
+			"key": "test_auth",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "subjects_name1",
+			"value": "Административная и хозяйственная деятельность",
+			"type": "string"
+		},
+		{
+			"key": "subjects_name2",
+			"value": "Административные правонарушения",
+			"type": "string"
+		},
+		{
+			"key": "subjects_name3",
+			"value": "\"Отставки и назначения\"",
+			"type": "string"
+		},
+		{
+			"key": "subjects_total",
+			"value": "698",
+			"type": "string"
+		},
+		{
+			"key": "string_1",
+			"value": "\"1:0JPQqdGM0JNWCdCzf2Jt0LHQotGV0ZUh0ZbRlBXCt0Je0JHQruKAnDcUXkZQ0YvQscKnehLRnNC1KtGK0Ll9BWLigLo/HXXCrhw=\"",
+			"type": "string"
+		},
+		{
+			"key": "string_2",
+			"value": "\"1:fmYoHEjQrRbQhz3RiUtm4oCh0JLRmtCLIyU10IzigqzRgGjQmCoR0JFg0YRhwrVzN9CxDUM50KcpdTbRiNCLwpjRkuKAphXRkVxh0JU50K5uWdC50L7RjX0C0KwQRsKp\"",
+			"type": "string"
+		},
+		{
+			"key": "news_agent_1",
+			"value": "Вести.Ru (vesti.ru)",
+			"type": "string"
+		},
+		{
+			"key": "news_agent_2",
+			"value": "Аргументы и Факты - Казань (kazan.aif.ru)",
+			"type": "string"
+		}
+	]
+}
